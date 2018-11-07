@@ -25,6 +25,10 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+
 </head>
 
 <body>
@@ -34,9 +38,59 @@
 </div>
 
 <div class="container">
+    <h2>Basket:</h2>
+    <table border="3" style="width: 75%; ">
+        <tr th:each=" item : ${basketList}">
+            <td th:text="${item.getName()}" style="width: 25%"></td>
+            <td th:text="${item.getDescription()}" style="width: 25%"></td>
+            <td th:text="${item.getPrice()}" style="width: 25%"></td>
+            <td th:text="${item.getDefaultCurrency()}" style="width: 25%"></td>
+        </tr>
+    </table>
+    <hr>
 
-    Sorry, the site its under maintence
-    <img src="/static/img/maintaince.png">
+
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        paypal.Button.render({
+            // Configure environment
+            env: 'sandbox',
+            client: {
+                sandbox: 'demo_sandbox_client_id',
+                production: 'demo_production_client_id'
+            },
+            // Customize button (optional)
+            locale: 'en_US',
+            style: {
+                size: 'small',
+                color: 'gold',
+                shape: 'pill',
+            },
+            // Set up a payment
+            payment: function(data, actions) {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: '0.01',
+                            currency: 'USD'
+                        }
+                    }]
+                });
+            },
+            // Execute the payment
+            onAuthorize: function(data, actions) {
+                return actions.payment.execute().then(function() {
+                    // Show a confirmation message to the buyer
+                    window.alert('Thank you for your purchase!');
+                });
+            }
+        }, '#paypal-button');
+    </script>
+    <div id="paypal-button"></div>
+
+
+    <hr>
+
 
 </div>
 
