@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.Basket;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
@@ -24,6 +25,26 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+
+        String item = req.getParameter("item");
+        Basket basket = Basket.getInstance();
+
+        if(item!= null) {
+            int index = Integer.parseInt(item);
+            basket.add(productDataStore.find(index));
+        }
+
+        /*
+         Add test element
+          */
+
+        basket.clear();
+        basket.add(productDataStore.find(2));
+        basket.add(productDataStore.find(2));
+        basket.add(productDataStore.find(3));
+        basket.add(productDataStore.find(1));
+
+
 
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));

@@ -24,25 +24,7 @@ public class CheckoutServlet extends HttpServlet {
         WebContext context = new WebContext(request, response, request.getServletContext());
 
         Basket basket = Basket.getInstance();
-        ProductDao productDataStore = ProductDaoMem.getInstance();
 
-        String item = request.getParameter("item");
-
-        /*
-         Add test element
-          */
-
-        basket.clear();
-        basket.add(productDataStore.find(2));
-        basket.add(productDataStore.find(2));
-        basket.add(productDataStore.find(3));
-        basket.add(productDataStore.find(1));
-
-
-        if(item!= null) {
-            int index = Integer.parseInt(item);
-            basket.add(productDataStore.find(index));
-        }
 
         context.setVariable("basketList", basket.getAll());
         engine.process("/product/checkout.html",context, response.getWriter());
