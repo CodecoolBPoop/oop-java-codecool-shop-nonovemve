@@ -39,12 +39,13 @@
 
 <div class="container">
     <h2>Basket:</h2>
-    <table border="3" style="width: 75%; ">
+    <table border="3" style="width: 75%; height: 50px">
         <tr th:each=" item : ${basketList}">
-            <td th:text="${item.getName()}" style="width: 25%"></td>
-            <td th:text="${item.getDescription()}" style="width: 25%"></td>
-            <td th:text="${item.getPrice()}" style="width: 25%"></td>
-            <td th:text="${item.getDefaultCurrency()}" style="width: 25%"></td>
+            <td th:text="${item.getName()}" style="width: 20%" align="center"></td>
+            <td style="width: 20%" align="center"><img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${item.id} + '.jpg'" alt="" style="width: 50px;height: 50px"></td>
+            <td th:text="${item.getPrice()}" style="width: 20%" align="center"></td>
+            <td th:text="${item.getProductCategory()}" style="width: 20%" align="center"></td>
+            <td style="width: 20%" align="center"><a th:attr="href='/checkout?item='+${item.id}">Remove</a></td>
         </tr>
     </table>
     <hr>
@@ -87,6 +88,7 @@
         }, '#paypal-button');
     </script>
     <div id="paypal-button"></div>
+    <a href="/" class="btn btn-outline-secondary">Back</a>
 
 
     <hr>

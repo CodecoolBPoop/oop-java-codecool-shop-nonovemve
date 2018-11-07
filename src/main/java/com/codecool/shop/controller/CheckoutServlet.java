@@ -22,11 +22,24 @@ public class CheckoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
+        ProductDao productDataStore = ProductDaoMem.getInstance();
 
-        Basket basket = Basket.getInstance();
+
+        String item = request.getParameter("item");
+
+        if(item != null){
+            int index = Integer.parseInt(item);
+            for(int i = 0;i<Basket.basket.size();i++){
+                if(Basket.basket.get(i).equals(productDataStore.find(index))){
+                    Basket.basket.remove(i);
+                    System.out.println("Find it");
+                    break;
+                }
+            }
+        }
 
 
-        context.setVariable("basketList", basket.getAll());
+        context.setVariable("basketList", Basket.basket);
         engine.process("/product/checkout.html",context, response.getWriter());
     }
 }

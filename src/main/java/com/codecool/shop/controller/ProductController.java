@@ -27,24 +27,13 @@ public class ProductController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
         String item = req.getParameter("item");
-        Basket basket = Basket.getInstance();
 
         if(item!= null) {
+            int actaulBasketSize = Basket.basket.size();
             int index = Integer.parseInt(item);
-            basket.add(productDataStore.find(index));
+            Basket.basket.add(productDataStore.find(index));
+            System.out.println((Basket.basket.size() > actaulBasketSize) ? "Done.Item its in the basket" : "Failed to add item to basket");
         }
-
-        /*
-         Add test element
-          */
-
-        basket.clear();
-        basket.add(productDataStore.find(2));
-        basket.add(productDataStore.find(2));
-        basket.add(productDataStore.find(3));
-        basket.add(productDataStore.find(1));
-
-
 
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
