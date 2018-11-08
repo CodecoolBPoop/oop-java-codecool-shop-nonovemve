@@ -31,7 +31,8 @@
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
-    <a href="/checkout" class="btn btn-outline-secondary">checkout</a>
+    <div th:text="${basketSize}"></div>
+    <a href="/basket" class="btn btn-outline-secondary">Basket</a>
 </div>
 
 <div class="container">

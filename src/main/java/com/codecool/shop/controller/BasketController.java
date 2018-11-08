@@ -2,11 +2,8 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.Basket;
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -16,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/checkout"})
-public class CheckoutServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/basket"})
+public class BasketController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -33,7 +30,7 @@ public class CheckoutServlet extends HttpServlet {
             for(int i = 0;i<Basket.basket.size();i++){
                 if(Basket.basket.get(i).equals(productDataStore.find(index))){
                     Basket.basket.remove(i);
-                    System.out.println("Find it");
+                    System.out.println("removed from the basket");
                     break;
                 }
             }
