@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.Basket;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
@@ -28,6 +29,15 @@ public class ProductController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
+        String item = req.getParameter("item");
+
+        if(item!= null) {
+            int actaulBasketSize = Basket.basket.size();
+            int index = Integer.parseInt(item);
+            Basket.basket.add(productDataStore.find(index));
+            System.out.println((Basket.basket.size() > actaulBasketSize) ? "Done.Item its in the basket" : "Failed to add item to basket");
+        }
+
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
 //        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
@@ -37,6 +47,7 @@ public class ProductController extends HttpServlet {
 //        context.setVariables(params);
 
 
+        context.setVariable("basketSize", Basket.basket.size());
         context.setVariable("recipient", "World");
         context.setVariable("allproducts", productCategoryDataStore.getAll());
         context.setVariable("allsuppliers", supplierDataStore.getAll());
@@ -51,12 +62,6 @@ public class ProductController extends HttpServlet {
             context.setVariable("products", productDataStore.getAll());
         }
         engine.process("product/index.html", context, resp.getWriter());
+    }
 
-        /*context.setVariable("recipient", "World");
-        context.setVariable("category", productCategoryDataStore.find(4));
-        context.setVariable("products", productDataStore.getAll());
-        engine.process("product/index.html", context, resp.getWriter());*/
-
-    }}
-
-
+}
