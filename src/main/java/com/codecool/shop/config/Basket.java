@@ -8,5 +8,4 @@ import java.util.ArrayList;
 public class Basket {
     public static ArrayList<Product> basket = new ArrayList<Product>();
 
-
 }

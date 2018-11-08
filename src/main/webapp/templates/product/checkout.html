@@ -39,7 +39,7 @@
 
 <div class="container">
     <h2>Basket:</h2>
-    <table border="3" style="width: 75%; height: 50px">
+    <table border="1" style="width: 75%; height: 50px">
         <tr th:each=" item : ${basketList}">
             <td th:text="${item.getName()}" style="width: 20%" align="center"></td>
             <td style="width: 20%" align="center"><img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${item.id} + '.jpg'" alt="" style="width: 50px;height: 50px"></td>
@@ -49,45 +49,6 @@
         </tr>
     </table>
     <hr>
-
-
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-    <script>
-        paypal.Button.render({
-            // Configure environment
-            env: 'sandbox',
-            client: {
-                sandbox: 'demo_sandbox_client_id',
-                production: 'demo_production_client_id'
-            },
-            // Customize button (optional)
-            locale: 'en_US',
-            style: {
-                size: 'small',
-                color: 'gold',
-                shape: 'pill',
-            },
-            // Set up a payment
-            payment: function(data, actions) {
-                return actions.payment.create({
-                    transactions: [{
-                        amount: {
-                            total: '0.01',
-                            currency: 'USD'
-                        }
-                    }]
-                });
-            },
-            // Execute the payment
-            onAuthorize: function(data, actions) {
-                return actions.payment.execute().then(function() {
-                    // Show a confirmation message to the buyer
-                    window.alert('Thank you for your purchase!');
-                });
-            }
-        }, '#paypal-button');
-    </script>
-    <div id="paypal-button"></div>
     <a href="/" class="btn btn-outline-secondary">Back</a>
 
 
