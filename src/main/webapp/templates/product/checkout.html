@@ -25,6 +25,10 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+
 </head>
 
 <body>
@@ -34,9 +38,22 @@
 </div>
 
 <div class="container">
+    <h2>Basket:</h2>
+    <table border="1" style="width: 75%; height: 50px">
+        <tr th:each=" item : ${basketList}">
+            <td th:text="${item.getName()}" style="width: 20%" align="center"></td>
+            <td style="width: 20%" align="center"><img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${item.id} + '.jpg'" alt="" style="width: 50px;height: 50px"></td>
+            <td th:text="${item.getPrice()}" style="width: 20%" align="center"></td>
+            <td th:text="${item.getProductCategory()}" style="width: 20%" align="center"></td>
+            <td style="width: 20%" align="center"><a th:attr="href='/basket?item='+${item.id}">Remove</a></td>
+        </tr>
+    </table>
+    <hr>
+    <a href="/" class="btn btn-outline-secondary">Back</a>
 
-    Sorry, the site its under maintence
-    <img src="/static/img/maintaince.png">
+
+    <hr>
+
 
 </div>
 
