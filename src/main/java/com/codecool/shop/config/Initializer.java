@@ -49,6 +49,8 @@ public class Initializer implements ServletContextListener {
         productCategoryDataStore.add(phone);
         ProductCategory accessories = new ProductCategory("Accessoriess", "Misc", "Stuff");
         productCategoryDataStore.add(accessories);
+        ProductCategory drones = new ProductCategory("Drones", "Hardware", "Flying, recording machines");
+        productCategoryDataStore.add(drones);
 
 
         //setting up products and printing it
@@ -58,7 +60,7 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Apple Macbook Pro 2017", 1199, "USD", "Not really fantastic price. Beautiful design. Easy usage. User friendly OS", notebook, apple));
         productDataStore.add(new Product("OnePlus 6", 499, "USD", "Octa-core processor. Top class camera. Oxygen OS. 'NEVER SETTLE'", phone, oneplus));
         productDataStore.add(new Product("Apple New Mac candle", 149, "USD", "The scent you get when you unbox a new Macbook. It's like the new car scent I guess... maybe not", accessories, apple));
-        productDataStore.add(new Product("DJI Mavic Pro", 499, "USD", "The drone you always wanted with hi def, wide-angle camera.", accessories, dji));
+        productDataStore.add(new Product("DJI Mavic Pro", 499, "USD", "The drone you always wanted with hi def, wide-angle camera.", drones, dji));
         productDataStore.add(new Product("OnePlus 6 Case", 9.99f, "USD", "Extra protection for your precious phone", accessories, oneplus));
         productDataStore.add(new Product("Apple MagSafe charger", 59.9f, "USD", "Backup charger for your notebook.", accessories, apple));
 
