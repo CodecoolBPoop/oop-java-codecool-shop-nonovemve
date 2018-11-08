@@ -38,6 +38,6 @@ public class BasketController extends HttpServlet {
 
 
         context.setVariable("basketList", Basket.basket);
-        engine.process("/product/checkout.html",context, response.getWriter());
+        engine.process("/product/basket.html",context, response.getWriter());
     }
 }

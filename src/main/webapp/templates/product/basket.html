@@ -44,12 +44,12 @@
             <td th:text="${item.getName()}" style="width: 20%" align="center"></td>
             <td style="width: 20%" align="center"><img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${item.id} + '.jpg'" alt="" style="width: 50px;height: 50px"></td>
             <td th:text="${item.getPrice()}" style="width: 20%" align="center"></td>
-            <td th:text="${item.getProductCategory()}" style="width: 20%" align="center"></td>
             <td style="width: 20%" align="center"><a th:attr="href='/basket?item='+${item.id}">Remove</a></td>
         </tr>
     </table>
     <hr>
     <a href="/" class="btn btn-outline-secondary">Back</a>
+    <a href="/checkout" class="btn btn-outline-secondary">Next</a>
 
 
     <hr>
