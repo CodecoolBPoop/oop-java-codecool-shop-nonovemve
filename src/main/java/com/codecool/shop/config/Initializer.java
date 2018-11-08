@@ -60,7 +60,7 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Apple New Mac candle", 149, "USD", "The scent you get when you unbox a new Macbook. It's like the new car scent I guess... maybe not", accessories, apple));
         productDataStore.add(new Product("DJI Mavic Pro", 499, "USD", "The drone you always wanted with hi def, wide-angle camera.", accessories, dji));
         productDataStore.add(new Product("OnePlus 6 Case", 9.99f, "USD", "Extra protection for your precious phone", accessories, oneplus));
-        productDataStore.add(new Product("Apple MagSafe charger", 60, "USD", "Backup charger for your notebook.", accessories, apple));
+        productDataStore.add(new Product("Apple MagSafe charger", 59.9f, "USD", "Backup charger for your notebook.", accessories, apple));
 
     }
 }
