@@ -21,44 +21,8 @@ public class CheckoutController extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
-        PrintWriter out = response.getWriter();
-        out.println("<html>\n" +
-                "<head>" +
-                "       <title> Checkout  </title>" +
-                "   </head>\n" +
 
-                "<body>\n" +
-                "<h1 align = \"center\"> Checkout </h1>\n" +
-                "<form align=\"center\" action=\"/order\" method=\"GET\">" +
-                    "First name:" + "<br>" +
-                    "<input type=\"text\" name=\"firstName\" value=\"Zsida\">" +
-                    "<br>" +
-                    "Last name:" + "<br>" +
-                    "<input type=\"text\" name=\"lastName\" value=\"Kadabra\">" +
-                    "<br>" +
-                    "Email:" + "<br>" +
-                    "<input type=\"text\" name=\"email\" value=\"\">" +
-                    "<br>" +
-                    "Phone number:" + "<br>" +
-                    "<input type=\"text\" name=\"phoneNumber\" value=\"\">" +
-                    "<br>" +
-                    "<p align=\"center\">Billing Address</p>" +
-                    "Country:" + "<br>" +
-                    "<input type=\"text\" name=\"country\" value=\"\">" +
-                    "<br>" +
-                    "City:" + "<br>" +
-                    "<input type=\"text\" name=\"city\" value=\"\">" +
-                    "<br>" +
-                    "Zipcode:" + "<br>" +
-                    "<input type=\"text\" name=\"zipCode\" value=\"\">" +
-                    "<br>" +
-                    "Address:" + "<br>" +
-                    "<input type=\"text\" name=\"address\" value=\"\">" +
-                    "<br><br>" +
-                    "<input type=\"submit\" value=\"Submit & Continue to Order\">" +
-                "</form>" +
-                "</body></html>"
-        );
+        engine.process("/product/checkout.html",context, response.getWriter());
     }
 
 }
