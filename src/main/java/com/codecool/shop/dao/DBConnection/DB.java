@@ -7,13 +7,16 @@ import java.util.logging.Logger;
 public class DB {
 
     private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = System.getenv("POSTGRES_DB_USER");
-    private static final String DB_PASSWORD = System.getenv("POSTGRES_DB_PASSWORD");
+    private static final String DB_USER = System.getProperty("codecoolshopdb.user");
+    private static final String DB_PASSWORD = System.getProperty("codecoolshopdb.pw");
 
     private Connection connection = null;
     private Statement createStatement = null;
 
     public DB() {
+    }
+
+    public void openConnection(){
         try {
             connection = DriverManager.getConnection(DATABASE,DB_USER,DB_PASSWORD);
             System.out.println("The gate is open and connected to:" + DATABASE);
@@ -23,6 +26,11 @@ public class DB {
             System.out.println("Database probleme:" + ex);
         }
     }
+
+    public Connection getConnection(){
+        return connection;
+    }
+
 
     public void closeConnection(){
         try {
