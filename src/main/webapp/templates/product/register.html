@@ -30,11 +30,39 @@
 
 </head>
 <body>
-    <div class="container signin">
-        <p>Already have an account? <a href="/login">Sign in</a>.</p>
-        <form method="post">
-        <p>You dont have account? <a href="/register_step1" methods="post">Register</a>.</p>
-        </form>
+<form action="/login">
+    <div class="container">
+        <h1>Register</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+
+        <b>First name</b>
+        <input type="text" placeholder="Enter first name" name="firstName">
+
+        <b>Last name</b>
+        <input type="text" placeholder="Enter last name" name="lastName">
+
+        <b>Email</b>
+        <input type="text" placeholder="Enter Email" name="email">
+
+        <b>Phone number</b>
+        <input type="text" placeholder="Enter phone number" name="phoneNumber">
+
+        <b>Country</b>
+        <input type="text" placeholder="Enter country" name="country">
+
+        <b>City</b>
+        <input type="text" placeholder="Enter city" name="city">
+
+        <b>Zipcode</b>
+        <input type="text" placeholder="Enter zipcode" name="zipcode">
+
+        <b>Address</b>
+        <input type="text" placeholder="Enter address" name="address">
+
+        <button type="submit" class="registerbtn">Confirm</button>
     </div>
+
+</form>
 </body>
 </html>

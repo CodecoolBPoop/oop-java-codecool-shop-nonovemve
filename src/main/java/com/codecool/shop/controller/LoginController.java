@@ -14,16 +14,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = {"/checkout"})
-public class CheckoutController extends HttpServlet{
-
+@WebServlet(urlPatterns = {"/login"})
+public class LoginController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
 
-        engine.process("/product/checkout.html",context, response.getWriter());
+        engine.process("product/login.html", context, response.getWriter());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
+        WebContext context = new WebContext(request, response, request.getServletContext());
+
+        engine.process("/product/register.html", context, response.getWriter());
+
     }
 
 }
