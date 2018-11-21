@@ -1,5 +1,7 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.dao.DBConnection.DB;
+
 import java.util.Currency;
 
 public class Product extends BaseModel {

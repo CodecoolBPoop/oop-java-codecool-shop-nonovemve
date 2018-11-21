@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.Basket;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.DBConnection.DB;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import org.thymeleaf.TemplateEngine;
@@ -15,6 +16,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/basket"})
 public class BasketController extends HttpServlet {
+    DB db = new DB();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
