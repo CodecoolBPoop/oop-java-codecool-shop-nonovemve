@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryDaoJDBC implements ProductCategoryDao {
+public class ProductCategoryDaoJDBC implements ProductCategoryDao{
 
     private List<ProductCategory> data = new ArrayList<>();
     private static ProductCategoryDaoJDBC instance = null;
@@ -30,12 +30,19 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 
     @Override
     public void add(ProductCategory category) {
+        Integer test = 6;
         db.openConnection();
-        String sql = "";
+        String sql = "insert into productcategory values (?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = db.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, category.getId());
+            preparedStatement.setString(2, category.getName());
+            preparedStatement.setString(3, category.getDescription());
+            preparedStatement.setString(4, category.getDepartment());
+            preparedStatement.execute();
+            db.closeConnection();
         }catch (SQLException ex){
-            System.out.println(ex);
+            System.out.println("itt nem jo" + ex);
         }
 
     }
