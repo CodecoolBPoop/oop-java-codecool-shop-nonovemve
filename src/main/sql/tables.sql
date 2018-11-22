@@ -32,7 +32,7 @@ id serial primary key not null,
 name varchar(50) not null,
 email varchar(50) not null,
 password varchar(20) not null,
-mobile integer,
+mobile varchar(15),
 billing_address varchar(80),
 shipping_address varchar(80)
 );

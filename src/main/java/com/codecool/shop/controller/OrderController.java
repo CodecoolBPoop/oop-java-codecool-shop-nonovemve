@@ -4,6 +4,8 @@ import com.codecool.shop.config.Basket;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.UserDaoJDBC;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -17,18 +19,25 @@ import java.io.PrintWriter;
 @WebServlet(urlPatterns = {"/order"})
 public class OrderController extends HttpServlet{
 
+    UserDaoJDBC save = new UserDaoJDBC();
+
     private String firstName = "";
     private String lastName = "";
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
-
-        engine.process("/product/order.html", context, response.getWriter());
-
-        this.firstName = request.getParameter("firstName");
-        this.lastName = request.getParameter("lastName");
+        String userName = request.getParameter("uname");
+        String password = request.getParameter("psw");
+        User userDetails = new User(userName, password);
+        if (userDetails.loginCheck(userDetails)) {
+            //System.out.println("Sikeres login");
+            engine.process("/product/order.html", context, response.getWriter());
+        }else {
+            //System.out.println("Sikertelen login");
+            engine.process("/product/login.html", context, response.getWriter());
+        }
     }
 
     public void setFirstName(String firstName) {

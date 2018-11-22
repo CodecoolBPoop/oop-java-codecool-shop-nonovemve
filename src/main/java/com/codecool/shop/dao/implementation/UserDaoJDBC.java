@@ -40,7 +40,7 @@ public class UserDaoJDBC {
             preparedStatement.setString(2, details.getUserName());
             preparedStatement.setString(3, details.getEmail());
             preparedStatement.setString(4, details.getPassword());
-            preparedStatement.setInt(5, Integer.parseInt(details.getMobile()));
+            preparedStatement.setString(5, details.getMobile());
             preparedStatement.setString(6, details.getBilling_address());
             preparedStatement.setString(7, details.getShipping_address());
             preparedStatement.execute();

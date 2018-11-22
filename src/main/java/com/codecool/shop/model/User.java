@@ -4,11 +4,12 @@ import com.codecool.shop.dao.DBConnection.DB;
 
 import java.sql.*;
 
-public class User extends BaseModel {
+public class User {
 
     DB getUserDB = new DB();
     private int id;
     private int nextId;
+    private String validlogin;
     private String userName;
     private String password;
     private String email;
@@ -17,7 +18,6 @@ public class User extends BaseModel {
     private String shipping_address;
 
     public User(String name, int id, String password, String email, String mobile, String billing_address, String shipping_address) {
-        super(name);
         this.userName = name;
         this.id = id;
         this.password = password;
@@ -25,12 +25,39 @@ public class User extends BaseModel {
         this.mobile = mobile;
         this.billing_address = billing_address;
         this.shipping_address = shipping_address;
+    }
 
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public boolean loginCheck(User user) {
+        getUserDB.openConnection();
+        String sql ="SELECT password FROM users WHERE users.name = '"+ user.getUserName() +"'";
+        try {
+            Statement statement = getUserDB.getCreateStatement();
+            ResultSet result = statement.executeQuery(sql);
+            while(result.next()) {
+                String logindata = result.getString("password");
+                this.validlogin = logindata;
+                getUserDB.closeConnection();
+            }
+            getUserDB.closeConnection();
+
+        }catch (SQLException ex) {
+            System.out.println("fail to open db" + ex);
+        }
+        if (user.getPassword().equals(this.validlogin)) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public int getNextId() {
         getUserDB.openConnection();
-        String sql = "select count(*) AS rowcount from users";
+        String sql = "SELECT count(*) AS rowcount FROM users";
         try {
             Statement statement = getUserDB.getCreateStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -47,12 +74,10 @@ public class User extends BaseModel {
         return nextId;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }
 
-    @Override
     public int getId() {
         return id;
     }
