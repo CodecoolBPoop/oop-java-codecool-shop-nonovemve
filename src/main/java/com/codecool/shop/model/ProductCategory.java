@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProductCategory extends BaseModel {
     private String department;
@@ -11,6 +12,14 @@ public class ProductCategory extends BaseModel {
         super(name);
         this.department = department;
         this.products = new ArrayList<>();
+    }
+
+    public ProductCategory(int id, String name, String department, String description) {
+        super(name);
+        this.department = department;
+        this.products = new ArrayList<>();
+        this.id = id;
+        this.description = description;
     }
 
     public String getDepartment() {
@@ -31,6 +40,21 @@ public class ProductCategory extends BaseModel {
 
     public void addProduct(Product product) {
         this.products.add(product);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductCategory category = (ProductCategory) o;
+        return Objects.equals(department, category.department) &&
+                Objects.equals(name, category.name) &&
+                Objects.equals(description, category.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(department, products);
     }
 
     public String toString() {

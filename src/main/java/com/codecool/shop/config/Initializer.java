@@ -3,6 +3,7 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.ProductCategoryDaoJDBC;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
@@ -20,7 +21,8 @@ public class Initializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductCategoryDaoJDBC productCategoryDataStore = ProductCategoryDaoJDBC.getInstance();
+        productCategoryDataStore.getAll();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
@@ -41,16 +43,21 @@ public class Initializer implements ServletContextListener {
         //setting up a new product category
         //ProductCategory allproducts = new ProductCategory("All", "Misc", "All products");
         //productCategoryDataStore.add(allproducts);
-        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(tablet);
-        ProductCategory notebook = new ProductCategory("Notebook", "Hardware", "Notebook is a pc that can be moved easily anywhere, anytime.");
+        //ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        //productCategoryDataStore.add(tablet);
+        ProductCategory tablet = productCategoryDataStore.find(1);
+        ProductCategory notebook = productCategoryDataStore.find(2);
+        ProductCategory phone = productCategoryDataStore.find(3);
+        ProductCategory accessories = productCategoryDataStore.find(4);
+        ProductCategory drones = productCategoryDataStore.find(5);
+        /*ProductCategory notebook = new ProductCategory("Notebook", "Hardware", "Notebook is a pc that can be moved easily anywhere, anytime.");
         productCategoryDataStore.add(notebook);
         ProductCategory phone = new ProductCategory("Phones", "Hardware", "Phone is a telephone.");
         productCategoryDataStore.add(phone);
         ProductCategory accessories = new ProductCategory("Accessoriess", "Misc", "Stuff");
         productCategoryDataStore.add(accessories);
         ProductCategory drones = new ProductCategory("Drones", "Hardware", "Flying, recording machines");
-        productCategoryDataStore.add(drones);
+        productCategoryDataStore.add(drones);*/
 
 
         //setting up products and printing it
