@@ -3,10 +3,7 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoJDBC;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -23,12 +20,13 @@ public class Initializer implements ServletContextListener {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDaoJDBC productCategoryDataStore = ProductCategoryDaoJDBC.getInstance();
         productCategoryDataStore.getAll();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        SupplierDaoJDBC supplierDataStore = SupplierDaoJDBC.getInstance();
+        supplierDataStore.getAll();
 
         //setting up a new supplier
         //Supplier allsuppliers = new Supplier("All suppliers", "Everything");
         //supplierDataStore.add(allsuppliers);
-        Supplier amazon = new Supplier("Amazon", "Digital content and services");
+        /*Supplier amazon = new Supplier("Amazon", "Digital content and services");
         supplierDataStore.add(amazon);
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         supplierDataStore.add(lenovo);
@@ -37,7 +35,12 @@ public class Initializer implements ServletContextListener {
         Supplier oneplus = new Supplier("OnePlus", "Phones");
         supplierDataStore.add(oneplus);
         Supplier dji = new Supplier("DJI", "Drones");
-        supplierDataStore.add(dji);
+        supplierDataStore.add(dji);*/
+        Supplier amazon = supplierDataStore.find(1);
+        Supplier lenovo = supplierDataStore.find(2);
+        Supplier apple = supplierDataStore.find(3);
+        Supplier oneplus = supplierDataStore.find(4);
+        Supplier dji = supplierDataStore.find(5);
 
 
         //setting up a new product category
