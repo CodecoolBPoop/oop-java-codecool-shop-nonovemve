@@ -11,6 +11,7 @@ public class DB {
     private static final String DB_PASSWORD = System.getProperty("codecoolshopdb.pw");
 
     private Connection connection = null;
+
     private Statement createStatement = null;
 
     public DB() {
@@ -31,6 +32,9 @@ public class DB {
         return connection;
     }
 
+    public Statement getCreateStatement() {
+        return createStatement;
+    }
 
     public void closeConnection(){
         try {

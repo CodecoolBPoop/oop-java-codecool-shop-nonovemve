@@ -12,13 +12,13 @@ import java.util.List;
 
 public class ProductCategoryDaoJDBC implements ProductCategoryDao{
 
-    private List<ProductCategory> data = new ArrayList<>();
+    //private List<ProductCategory> data = new ArrayList<>();
     private static ProductCategoryDaoJDBC instance = null;
     private DB db = new DB();
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ProductCategoryDaoJDBC() {
+    public ProductCategoryDaoJDBC() {
     }
 
     public static ProductCategoryDaoJDBC getInstance() {
@@ -30,15 +30,15 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao{
 
     @Override
     public void add(ProductCategory category) {
-        Integer test = 6;
         db.openConnection();
         String sql = "insert into productcategory values (?, ?, ?, ?)";
         try {
+            System.out.println("GOAL");
             PreparedStatement preparedStatement = db.getConnection().prepareStatement(sql);
-            preparedStatement.setInt(1, category.getId());
+            preparedStatement.setInt(1, 6);
             preparedStatement.setString(2, category.getName());
-            preparedStatement.setString(3, category.getDescription());
-            preparedStatement.setString(4, category.getDepartment());
+            preparedStatement.setString(3, category.getName());
+            preparedStatement.setString(4, category.getName());
             preparedStatement.execute();
             db.closeConnection();
         }catch (SQLException ex){

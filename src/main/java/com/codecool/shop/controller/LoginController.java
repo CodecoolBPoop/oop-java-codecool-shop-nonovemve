@@ -3,7 +3,9 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.Basket;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.ProductCategoryDaoJDBC;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.model.ProductCategory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -24,14 +26,4 @@ public class LoginController extends HttpServlet{
 
         engine.process("product/login.html", context, response.getWriter());
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
-        WebContext context = new WebContext(request, response, request.getServletContext());
-
-        engine.process("/product/register.html", context, response.getWriter());
-
-    }
-
 }
