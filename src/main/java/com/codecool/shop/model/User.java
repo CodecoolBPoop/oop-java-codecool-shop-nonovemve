@@ -33,6 +33,7 @@ public class User {
     }
 
     public boolean loginCheck(User user) {
+        // TODO: use the DAO here
         getUserDB.openConnection();
         String sql ="SELECT password FROM users WHERE users.name = '"+ user.getUserName() +"'";
         try {
@@ -52,6 +53,7 @@ public class User {
     }
 
     public int getNextId() {
+        // TODO: use dao
         getUserDB.openConnection();
         String sql = "SELECT count(*) AS rowcount FROM users";
         try {
