@@ -48,11 +48,8 @@ public class User {
         }catch (SQLException ex) {
             System.out.println("fail to open db" + ex);
         }
-        if (user.getPassword().equals(this.validlogin)) {
-            return true;
-        }else {
-            return false;
-        }
+
+        return user.getPassword().equals(this.validlogin);
     }
 
     public int getNextId() {

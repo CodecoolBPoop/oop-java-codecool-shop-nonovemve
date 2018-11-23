@@ -16,16 +16,22 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/register_step2"})
 public class RegisterStep2Controller extends HttpServlet {
-    UserDaoJDBC save = new UserDaoJDBC();
+    UserDaoJDBC userDao = new UserDaoJDBC();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
-        User setDetails = new User(request.getParameter("userName"),999,request.getParameter("password"), request.getParameter("email"),request.getParameter("mobile"),request.getParameter("billingAddress"),request.getParameter("shippingAddress"));
+        User setDetails = new User(request.getParameter("userName"),
+                                   999,
+                                   request.getParameter("password"),
+                                   request.getParameter("email"),
+                                   request.getParameter("mobile"),
+                                   request.getParameter("billingAddress"),
+                                   request.getParameter("shippingAddress"));
         int newID = setDetails.getNextId();
         setDetails.setId(newID);
-        save.add(setDetails);
+        userDao.add(setDetails);
 
 
         engine.process("/product/register_step2.html", context, response.getWriter());
