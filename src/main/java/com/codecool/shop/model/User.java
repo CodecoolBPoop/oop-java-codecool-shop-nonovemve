@@ -41,12 +41,11 @@ public class User {
             while(result.next()) {
                 String logindata = result.getString("password");
                 this.validlogin = logindata;
-                getUserDB.closeConnection();
             }
-            getUserDB.closeConnection();
-
         }catch (SQLException ex) {
             System.out.println("fail to open db" + ex);
+        } finally {
+            getUserDB.closeConnection();
         }
 
         return user.getPassword().equals(this.validlogin);
